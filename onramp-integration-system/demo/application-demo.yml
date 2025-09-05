@@ -1,0 +1,38 @@
+# Demo Application Configuration
+spring:
+  application:
+    name: onramp-integration-demo
+  profiles:
+    active: demo
+
+# OnRamp Configuration for Demo
+onramp:
+  providers:
+    onramper:
+      api-key: ${ONRAMPER_API_KEY:demo-api-key}
+      api-secret: ${ONRAMPER_API_SECRET:demo-secret}
+      base-url: https://api-stg.onramper.com
+      is-sandbox: true
+      timeout: 30
+      retry-attempts: 3
+      enabled: true
+      priority: 1
+      description: "Onramper aggregator service for demo"
+
+# Logging Configuration
+logging:
+  level:
+    com.onramp.integration: INFO
+    org.springframework.web.reactive: WARN
+    reactor.netty: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Demo specific settings
+demo:
+  default-fiat-currency: USD
+  default-crypto-currency: BTC
+  default-amount: 100.0
+  default-wallet-address: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+  default-redirect-url: https://demo.onramp-integration.com/callback
+
