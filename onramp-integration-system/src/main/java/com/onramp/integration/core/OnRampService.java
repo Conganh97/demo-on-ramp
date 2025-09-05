@@ -5,97 +5,96 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Giao diện chung cho tất cả các dịch vụ On-ramp.
- * Định nghĩa hợp đồng mà mọi nhà cung cấp dịch vụ On-ramp phải tuân theo.
- * 
- * Sử dụng Strategy Pattern để cho phép hoán đổi giữa các nhà cung cấp khác nhau.
+ * Common interface for all On-ramp services.
+ * Defines the contract that every On-ramp service provider must follow.
+ * Uses Strategy Pattern to allow switching between different providers.
  */
 public interface OnRampService {
 
     /**
-     * Lấy danh sách các tài sản (tiền điện tử và tiền pháp định) được hỗ trợ.
+     * Gets a list of supported assets (cryptocurrencies and fiat currencies).
      * 
-     * @return CompletableFuture chứa danh sách các tài sản được hỗ trợ
+     * @return CompletableFuture containing a list of supported assets
      */
     CompletableFuture<List<Asset>> getSupportedAssets();
 
     /**
-     * Lấy báo giá cho một giao dịch mua tiền điện tử.
-     * Cần cung cấp fiatAmount HOẶC cryptoAmount.
+     * Gets quote for a cryptocurrency purchase transaction.
+     * Must provide either fiatAmount OR cryptoAmount.
      * 
-     * @param fiatCurrency Mã tiền pháp định (ví dụ: USD, VND)
-     * @param cryptoCurrency Mã tiền điện tử (ví dụ: BTC, ETH)
-     * @param fiatAmount Số tiền pháp định (optional, nếu biết trước)
-     * @param cryptoAmount Số lượng tiền điện tử (optional, nếu biết trước)
-     * @return CompletableFuture chứa thông tin báo giá
-     * @throws IllegalArgumentException nếu cả fiatAmount và cryptoAmount đều null hoặc cả hai đều có giá trị
+     * @param fiatCurrency Fiat currency code (e.g., USD, VND)
+     * @param cryptoCurrency Cryptocurrency code (e.g., BTC, ETH)
+     * @param fiatAmount Fiat amount (optional, if known in advance)
+     * @param cryptoAmount Cryptocurrency amount (optional, if known in advance)
+     * @return CompletableFuture containing quote information
+     * @throws IllegalArgumentException if both fiatAmount and cryptoAmount are null or both have values
      */
     CompletableFuture<Quote> getQuote(String fiatCurrency, String cryptoCurrency, 
                                      Double fiatAmount, Double cryptoAmount);
 
     /**
-     * Tạo một đơn hàng mua tiền điện tử.
-     * Cần cung cấp fiatAmount HOẶC cryptoAmount.
+     * Creates a cryptocurrency purchase order.
+     * Must provide either fiatAmount OR cryptoAmount.
      * 
-     * @param fiatCurrency Mã tiền pháp định
-     * @param cryptoCurrency Mã tiền điện tử
-     * @param fiatAmount Số tiền pháp định (optional)
-     * @param cryptoAmount Số lượng tiền điện tử (optional)
-     * @param walletAddress Địa chỉ ví nhận tiền điện tử
-     * @param redirectUrl URL để chuyển hướng sau khi hoàn tất thanh toán
-     * @return CompletableFuture chứa thông tin đơn hàng đã tạo
-     * @throws IllegalArgumentException nếu cả fiatAmount và cryptoAmount đều null hoặc cả hai đều có giá trị
+     * @param fiatCurrency Fiat currency code
+     * @param cryptoCurrency Cryptocurrency code
+     * @param fiatAmount Fiat amount (optional)
+     * @param cryptoAmount Cryptocurrency amount (optional)
+     * @param walletAddress Wallet address to receive cryptocurrency
+     * @param redirectUrl URL to redirect after payment completion
+     * @return CompletableFuture containing created order information
+     * @throws IllegalArgumentException if both fiatAmount and cryptoAmount are null or both have values
      */
     CompletableFuture<Order> createOrder(String fiatCurrency, String cryptoCurrency,
                                         Double fiatAmount, Double cryptoAmount,
                                         String walletAddress, String redirectUrl);
 
     /**
-     * Lấy trạng thái của một đơn hàng đã tạo.
+     * Gets status of a created order.
      * 
-     * @param orderId ID của đơn hàng
-     * @return CompletableFuture chứa thông tin trạng thái đơn hàng
-     * @throws IllegalArgumentException nếu orderId null hoặc rỗng
+     * @param orderId Order ID
+     * @return CompletableFuture containing order status information
+     * @throws IllegalArgumentException if orderId is null or empty
      */
     CompletableFuture<Order> getOrderStatus(String orderId);
 
     /**
-     * Lấy danh sách các phương thức thanh toán được hỗ trợ cho cặp tiền tệ cụ thể.
+     * Gets a list of supported payment methods for a specific currency pair.
      * 
-     * @param fiatCurrency Mã tiền pháp định
-     * @param cryptoCurrency Mã tiền điện tử
-     * @return CompletableFuture chứa danh sách các phương thức thanh toán
+     * @param fiatCurrency Fiat currency code
+     * @param cryptoCurrency Cryptocurrency code
+     * @return CompletableFuture containing a list of payment methods
      */
     CompletableFuture<List<PaymentMethod>> getPaymentMethods(String fiatCurrency, String cryptoCurrency);
 
     /**
-     * Lấy lịch sử giao dịch của người dùng.
-     * Lưu ý: Không phải tất cả các nhà cung cấp đều hỗ trợ chức năng này qua API.
+     * Gets a user's transaction history.
+     * Note: Not all providers support this functionality via API.
      * 
-     * @param userId ID của người dùng
-     * @return CompletableFuture chứa danh sách các giao dịch
-     * @throws UnsupportedOperationException nếu nhà cung cấp không hỗ trợ chức năng này
+     * @param userId User ID
+     * @return CompletableFuture containing a list of transactions
+     * @throws UnsupportedOperationException if the provider doesn't support this functionality
      */
     CompletableFuture<List<Transaction>> getTransactionHistory(String userId);
 
     /**
-     * Lấy tên của nhà cung cấp dịch vụ.
+     * Gets the service provider name.
      * 
-     * @return Tên nhà cung cấp dịch vụ
+     * @return Service provider name
      */
     String getProviderName();
 
     /**
-     * Kiểm tra xem dịch vụ có khả dụng hay không.
+     * Checks if service is available.
      * 
-     * @return CompletableFuture chứa true nếu dịch vụ khả dụng, false nếu không
+     * @return CompletableFuture containing true if service is available, false otherwise
      */
     CompletableFuture<Boolean> isServiceAvailable();
 
     /**
-     * Xác thực cấu hình của dịch vụ.
+     * Validates service configuration.
      * 
-     * @return CompletableFuture chứa true nếu cấu hình hợp lệ, false nếu không
+     * @return CompletableFuture containing true if the configuration is valid, false otherwise
      */
     CompletableFuture<Boolean> validateConfiguration();
 }

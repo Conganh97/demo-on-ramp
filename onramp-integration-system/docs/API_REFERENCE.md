@@ -1252,9 +1252,9 @@ OnRampService service = serviceFactory.createServiceWithDefaultConfig("onramper"
 CompletableFuture<Quote> quoteFuture = service.getQuote("USD", "BTC", 100.0, null);
 Quote quote = quoteFuture.get();
 
-System.out.println("Rate: " + quote.getExchangeRate());
-System.out.println("Fee: " + quote.getFee());
-System.out.println("Total: " + quote.getTotalFiatAmount());
+log.info("Rate: " + quote.getExchangeRate());
+log.info("Fee: " + quote.getFee());
+log.info("Total: " + quote.getTotalFiatAmount());
 ```
 
 ### Tạo đơn hàng
@@ -1269,8 +1269,8 @@ CompletableFuture<Order> orderFuture = service.createOrder(
 );
 
 Order order = orderFuture.get();
-System.out.println("Order ID: " + order.getOrderId());
-System.out.println("Status: " + order.getStatus());
+log.info("Order ID: " + order.getOrderId());
+log.info("Status: " + order.getStatus());
 ```
 
 ### Kiểm tra trạng thái đơn hàng
@@ -1280,7 +1280,7 @@ System.out.println("Status: " + order.getStatus());
 CompletableFuture<Order> statusFuture = service.getOrderStatus(order.getOrderId());
 Order updatedOrder = statusFuture.get();
 
-System.out.println("Current status: " + updatedOrder.getStatus());
+log.info("Current status: " + updatedOrder.getStatus());
 ```
 
 ### Xử lý lỗi
@@ -1289,9 +1289,9 @@ System.out.println("Current status: " + updatedOrder.getStatus());
 try {
     OnRampService service = serviceFactory.createService("invalid-provider", config);
 } catch (ProviderNotSupportedException e) {
-    System.err.println("Provider not supported: " + e.getProviderName());
+    log.error("Provider not supported: " + e.getProviderName());
 } catch (InvalidConfigurationException e) {
-    System.err.println("Invalid configuration: " + e.getMessage());
+    log.error("Invalid configuration: " + e.getMessage());
 }
 
 // Xử lý lỗi async
@@ -1300,7 +1300,7 @@ service.getQuote("USD", "BTC", 100.0, null)
         if (throwable != null) {
             if (throwable instanceof OnRampException) {
                 OnRampException onRampException = (OnRampException) throwable;
-                System.err.println("OnRamp error: " + onRampException.getErrorCode());
+                log.error("OnRamp error: " + onRampException.getErrorCode());
             }
             return null;
         }

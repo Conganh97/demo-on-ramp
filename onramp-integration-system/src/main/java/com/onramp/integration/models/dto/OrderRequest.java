@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 /**
- * DTO cho yêu cầu tạo đơn hàng.
+ * DTO for order creation requests.
  */
 @Data
 @NoArgsConstructor
@@ -16,11 +16,11 @@ import lombok.Builder;
 @Builder
 public class OrderRequest {
     
-    @NotBlank(message = "Mã tiền pháp định không được để trống")
+    @NotBlank(message = "Fiat currency cannot be empty")
     @JsonProperty("fiat_currency")
     private String fiatCurrency;
     
-    @NotBlank(message = "Mã tiền điện tử không được để trống")
+    @NotBlank(message = "Crypto currency cannot be empty")
     @JsonProperty("crypto_currency")
     private String cryptoCurrency;
     
@@ -30,14 +30,14 @@ public class OrderRequest {
     @JsonProperty("crypto_amount")
     private Double cryptoAmount;
     
-    @NotBlank(message = "Địa chỉ ví không được để trống")
+    @NotBlank(message = "Wallet address cannot be empty")
     @JsonProperty("wallet_address")
     private String walletAddress;
     
     @JsonProperty("payment_method_id")
     private String paymentMethodId;
     
-    @NotBlank(message = "URL chuyển hướng không được để trống")
+    @NotBlank(message = "Redirect URL cannot be empty")
     @JsonProperty("redirect_url")
     private String redirectUrl;
     

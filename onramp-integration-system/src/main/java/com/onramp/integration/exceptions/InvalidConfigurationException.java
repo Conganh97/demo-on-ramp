@@ -1,7 +1,7 @@
 package com.onramp.integration.exceptions;
 
 /**
- * Exception được ném khi cấu hình của nhà cung cấp dịch vụ không hợp lệ.
+ * Exception thrown when service provider configuration is invalid.
  */
 public class InvalidConfigurationException extends OnRampException {
 

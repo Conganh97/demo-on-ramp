@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Response DTOs cho các API calls của Onramper.
- * Các class này sẽ được cập nhật dựa trên response format thực tế của Onramper API.
+ * Response DTOs for Onramper API calls.
+ * These classes will be updated based on actual Onramper API response format.
  */
 
 @Data
@@ -44,7 +44,7 @@ public class OnramperSupportedResponse {
 }
 
 @Data
-public class OnramperQuoteResponse {
+ class OnramperQuoteResponse {
     @JsonProperty("message")
     private List<OnramperQuote> message;
     
@@ -86,7 +86,7 @@ public class OnramperQuoteResponse {
 }
 
 @Data
-public class OnramperOrderResponse {
+ class OnramperOrderResponse {
     @JsonProperty("transactionInformation")
     private TransactionInformation transactionInformation;
     
@@ -122,7 +122,7 @@ public class OnramperOrderResponse {
 }
 
 @Data
-public class OnramperTransactionResponse {
+ class OnramperTransactionResponse {
     @JsonProperty("id")
     private String id;
     
@@ -164,7 +164,7 @@ public class OnramperTransactionResponse {
 }
 
 @Data
-public class OnramperPaymentMethodsResponse {
+ class OnramperPaymentMethodsResponse {
     @JsonProperty("message")
     private List<OnramperPaymentMethod> message;
     
@@ -197,7 +197,7 @@ public class OnramperPaymentMethodsResponse {
 }
 
 @Data
-public class OnramperTransactionHistoryResponse {
+ class OnramperTransactionHistoryResponse {
     @JsonProperty("message")
     private List<OnramperTransactionResponse> message;
 }

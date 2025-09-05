@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 /**
- * DTO cho yêu cầu báo giá.
+ * DTO for quote requests.
  */
 @Data
 @NoArgsConstructor
@@ -16,11 +16,11 @@ import lombok.Builder;
 @Builder
 public class QuoteRequest {
     
-    @NotBlank(message = "Mã tiền pháp định không được để trống")
+    @NotBlank(message = "Fiat currency cannot be empty")
     @JsonProperty("fiat_currency")
     private String fiatCurrency;
     
-    @NotBlank(message = "Mã tiền điện tử không được để trống")
+    @NotBlank(message = "Crypto currency cannot be empty")
     @JsonProperty("crypto_currency")
     private String cryptoCurrency;
     

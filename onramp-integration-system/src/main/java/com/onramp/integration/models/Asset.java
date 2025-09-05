@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 /**
- * Mô hình dữ liệu cho tài sản (tiền điện tử và tiền pháp định).
+ * Data model for assets (cryptocurrency and fiat currency).
  */
 @Entity
 @Table(name = "assets")
@@ -25,24 +25,24 @@ public class Asset {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotBlank(message = "Mã tiền điện tử không được để trống")
+    @NotBlank(message = "Crypto code cannot be empty")
     @JsonProperty("crypto_code")
     @Column(name = "crypto_code", nullable = false)
     private String cryptoCode;
     
-    @NotBlank(message = "Mã tiền pháp định không được để trống")
+    @NotBlank(message = "Fiat code cannot be empty")
     @JsonProperty("fiat_code")
     @Column(name = "fiat_code", nullable = false)
     private String fiatCode;
     
-    @NotNull(message = "Số lượng tối thiểu không được null")
-    @Positive(message = "Số lượng tối thiểu phải lớn hơn 0")
+    @NotNull(message = "Minimum amount cannot be null")
+    @Positive(message = "Minimum amount must be greater than 0")
     @JsonProperty("min_amount")
     @Column(name = "min_amount", nullable = false)
     private Double minAmount;
     
-    @NotNull(message = "Số lượng tối đa không được null")
-    @Positive(message = "Số lượng tối đa phải lớn hơn 0")
+    @NotNull(message = "Maximum amount cannot be null")
+    @Positive(message = "Maximum amount must be greater than 0")
     @JsonProperty("max_amount")
     @Column(name = "max_amount", nullable = false)
     private Double maxAmount;
@@ -60,23 +60,5 @@ public class Asset {
     @Column(name = "provider_name")
     private String providerName;
 
-    // Custom constructor for backward compatibility
-    public Asset(String cryptoCode, String fiatCode, Double minAmount, Double maxAmount) {
-        this.cryptoCode = cryptoCode;
-        this.fiatCode = fiatCode;
-        this.minAmount = minAmount;
-        this.maxAmount = maxAmount;
-        this.isAvailable = true;
-    }
-
-    public Asset(String cryptoCode, String fiatCode, Double minAmount, Double maxAmount, 
-                 String network, Boolean isAvailable) {
-        this.cryptoCode = cryptoCode;
-        this.fiatCode = fiatCode;
-        this.minAmount = minAmount;
-        this.maxAmount = maxAmount;
-        this.network = network;
-        this.isAvailable = isAvailable;
-    }
 }
 

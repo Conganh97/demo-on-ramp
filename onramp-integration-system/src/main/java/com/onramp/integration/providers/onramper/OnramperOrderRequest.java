@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * DTO cho request tạo đơn hàng Onramper.
+ * DTO for Onramper order creation requests.
  */
 @Data
 @Builder

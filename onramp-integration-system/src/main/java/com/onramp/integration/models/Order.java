@@ -11,7 +11,7 @@ import lombok.Builder;
 import java.time.LocalDateTime;
 
 /**
- * Mô hình dữ liệu cho đơn hàng.
+ * Data model for orders.
  */
 @Entity
 @Table(name = "orders")
@@ -25,12 +25,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotBlank(message = "ID đơn hàng không được để trống")
+    @NotBlank(message = "Order ID cannot be empty")
     @JsonProperty("order_id")
     @Column(name = "order_id", nullable = false, unique = true)
     private String orderId;
     
-    @NotNull(message = "Trạng thái đơn hàng không được null")
+    @NotNull(message = "Order status cannot be null")
     @Enumerated(EnumType.STRING)
     @JsonProperty("status")
     @Column(name = "status", nullable = false)

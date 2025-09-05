@@ -1,0 +1,69 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: onramp-integration-system
+  
+  # Database configuration (H2 for demo)
+  datasource:
+    url: jdbc:h2:mem:onramp
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+# OnRamp provider configurations
+onramp:
+  # Cache configuration
+  cache:
+    enabled: true
+    max-size: 100
+    ttl-minutes: 60
+  
+  providers:
+    onramper:
+      api-key: ${ONRAMPER_API_KEY:demo-api-key}
+      api-secret: ${ONRAMPER_API_SECRET:}
+      base-url: ${ONRAMPER_BASE_URL:https://api-stg.onramper.com}
+      webhook-url: ${ONRAMPER_WEBHOOK_URL:}
+      sandbox: true
+      timeout: 30
+      retry-attempts: 3
+      enabled: true
+      priority: 1
+      description: "Onramper aggregator service"
+      additional-config:
+        max-connections: 100
+        connection-timeout: 30000
+
+# Logging configuration
+logging:
+  level:
+    com.onramp.integration: DEBUG
+    org.springframework.web.client: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Management endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

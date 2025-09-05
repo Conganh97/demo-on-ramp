@@ -1,36 +1,36 @@
 package com.onramp.integration.models;
 
 /**
- * Enum định nghĩa các trạng thái đơn hàng trong hệ thống On-ramp.
+ * Enum defining order statuses in the On-ramp system.
  */
 public enum OrderStatus {
     /**
-     * Đơn hàng đang chờ thanh toán từ người dùng.
+     * Order is waiting for payment from user.
      */
     PENDING_PAYMENT("pending_payment"),
     
     /**
-     * Đơn hàng đang được xử lý.
+     * Order is being processed.
      */
     PROCESSING("processing"),
     
     /**
-     * Đơn hàng đã hoàn thành thành công.
+     * Order completed successfully.
      */
     COMPLETED("completed"),
     
     /**
-     * Đơn hàng thất bại.
+     * Order failed.
      */
     FAILED("failed"),
     
     /**
-     * Đơn hàng đã bị hủy.
+     * Order was cancelled.
      */
     CANCELLED("cancelled"),
     
     /**
-     * Đơn hàng đã hết hạn.
+     * Order has expired.
      */
     EXPIRED("expired");
 
@@ -45,11 +45,11 @@ public enum OrderStatus {
     }
 
     /**
-     * Chuyển đổi từ string value sang enum.
+     * Converts from string value to enum.
      * 
-     * @param value Giá trị string
-     * @return OrderStatus tương ứng
-     * @throws IllegalArgumentException nếu không tìm thấy enum phù hợp
+     * @param value String value
+     * @return Corresponding OrderStatus
+     * @throws IllegalArgumentException if no matching enum is found
      */
     public static OrderStatus fromValue(String value) {
         for (OrderStatus status : OrderStatus.values()) {

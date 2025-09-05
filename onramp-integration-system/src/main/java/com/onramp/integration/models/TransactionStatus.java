@@ -1,26 +1,26 @@
 package com.onramp.integration.models;
 
 /**
- * Enum định nghĩa các trạng thái giao dịch trong hệ thống On-ramp.
+ * Enum defining transaction statuses in the On-ramp system.
  */
 public enum TransactionStatus {
     /**
-     * Giao dịch đang chờ xử lý.
+     * Transaction is pending processing.
      */
     PENDING("pending"),
     
     /**
-     * Giao dịch thành công.
+     * Transaction successful.
      */
     SUCCESS("success"),
     
     /**
-     * Giao dịch thất bại.
+     * Transaction failed.
      */
     FAILED("failed"),
     
     /**
-     * Giao dịch đã bị hủy.
+     * Transaction was cancelled.
      */
     CANCELLED("cancelled");
 
@@ -35,11 +35,11 @@ public enum TransactionStatus {
     }
 
     /**
-     * Chuyển đổi từ string value sang enum.
+     * Converts from string value to enum.
      * 
-     * @param value Giá trị string
-     * @return TransactionStatus tương ứng
-     * @throws IllegalArgumentException nếu không tìm thấy enum phù hợp
+     * @param value String value
+     * @return Corresponding TransactionStatus
+     * @throws IllegalArgumentException if no matching enum is found
      */
     public static TransactionStatus fromValue(String value) {
         for (TransactionStatus status : TransactionStatus.values()) {

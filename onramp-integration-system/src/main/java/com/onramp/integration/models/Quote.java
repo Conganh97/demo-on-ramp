@@ -11,7 +11,7 @@ import lombok.Builder;
 import java.time.LocalDateTime;
 
 /**
- * Mô hình dữ liệu cho báo giá.
+ * Data model for quotes.
  */
 @Data
 @NoArgsConstructor
@@ -19,35 +19,35 @@ import java.time.LocalDateTime;
 @Builder
 public class Quote {
     
-    @NotNull(message = "Số tiền pháp định không được null")
-    @Positive(message = "Số tiền pháp định phải lớn hơn 0")
+    @NotNull(message = "Fiat amount cannot be null")
+    @Positive(message = "Fiat amount must be greater than 0")
     @JsonProperty("fiat_amount")
     private Double fiatAmount;
     
-    @NotNull(message = "Số lượng tiền điện tử không được null")
-    @Positive(message = "Số lượng tiền điện tử phải lớn hơn 0")
+    @NotNull(message = "Crypto amount cannot be null")
+    @Positive(message = "Crypto amount must be greater than 0")
     @JsonProperty("crypto_amount")
     private Double cryptoAmount;
     
-    @NotBlank(message = "Mã tiền pháp định không được để trống")
+    @NotBlank(message = "Fiat currency cannot be empty")
     @JsonProperty("fiat_currency")
     private String fiatCurrency;
     
-    @NotBlank(message = "Mã tiền điện tử không được để trống")
+    @NotBlank(message = "Crypto currency cannot be empty")
     @JsonProperty("crypto_currency")
     private String cryptoCurrency;
     
-    @NotNull(message = "Tỷ giá hối đoái không được null")
-    @Positive(message = "Tỷ giá hối đoái phải lớn hơn 0")
+    @NotNull(message = "Exchange rate cannot be null")
+    @Positive(message = "Exchange rate must be greater than 0")
     @JsonProperty("exchange_rate")
     private Double exchangeRate;
     
-    @NotNull(message = "Phí giao dịch không được null")
+    @NotNull(message = "Fee cannot be null")
     @JsonProperty("fee")
     private Double fee;
     
-    @NotNull(message = "Tổng số tiền pháp định không được null")
-    @Positive(message = "Tổng số tiền pháp định phải lớn hơn 0")
+    @NotNull(message = "Total fiat amount cannot be null")
+    @Positive(message = "Total fiat amount must be greater than 0")
     @JsonProperty("total_fiat_amount")
     private Double totalFiatAmount;
     
@@ -59,17 +59,5 @@ public class Quote {
     
     @JsonProperty("provider_name")
     private String providerName;
-
-    // Custom constructor for backward compatibility
-    public Quote(Double fiatAmount, Double cryptoAmount, String fiatCurrency, String cryptoCurrency,
-                 Double exchangeRate, Double fee, Double totalFiatAmount) {
-        this.fiatAmount = fiatAmount;
-        this.cryptoAmount = cryptoAmount;
-        this.fiatCurrency = fiatCurrency;
-        this.cryptoCurrency = cryptoCurrency;
-        this.exchangeRate = exchangeRate;
-        this.fee = fee;
-        this.totalFiatAmount = totalFiatAmount;
-    }
 }
 

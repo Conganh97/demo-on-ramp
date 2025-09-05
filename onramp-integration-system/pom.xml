@@ -80,8 +80,8 @@
 
         <!-- HTTP Client -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
         </dependency>
 
         <!-- Validation -->
@@ -123,12 +123,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- WireMock for API testing -->
-        <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock-jre8</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--        &lt;!&ndash; WireMock for API testing &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.github.tomakehurst</groupId>-->
+<!--            <artifactId>wiremock-jre8</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
         <!-- Apache Commons -->
         <dependency>

@@ -3,7 +3,7 @@ package com.onramp.integration.exceptions;
 import lombok.Getter;
 
 /**
- * Base exception cho tất cả các lỗi trong hệ thống On-ramp.
+ * Base exception for all errors in the On-ramp system.
  */
 @Getter
 public class OnRampException extends RuntimeException {

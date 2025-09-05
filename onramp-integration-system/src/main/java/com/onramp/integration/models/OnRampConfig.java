@@ -11,7 +11,7 @@ import lombok.Builder;
 import java.util.Map;
 
 /**
- * Mô hình dữ liệu cho cấu hình nhà cung cấp dịch vụ On-ramp.
+ * Data model for OnRamp service provider configuration.
  */
 @Data
 @NoArgsConstructor
@@ -19,18 +19,18 @@ import java.util.Map;
 @Builder
 public class OnRampConfig {
     
-    @NotBlank(message = "Tên nhà cung cấp dịch vụ không được để trống")
+    @NotBlank(message = "Provider name cannot be empty")
     @JsonProperty("provider_name")
     private String providerName;
     
-    @NotBlank(message = "API key không được để trống")
+    @NotBlank(message = "API key cannot be empty")
     @JsonProperty("api_key")
     private String apiKey;
     
     @JsonProperty("api_secret")
     private String apiSecret;
     
-    @NotBlank(message = "URL cơ sở của API không được để trống")
+    @NotBlank(message = "Base URL cannot be empty")
     @JsonProperty("base_url")
     private String baseUrl;
     
@@ -41,13 +41,13 @@ public class OnRampConfig {
     @Builder.Default
     private Boolean isSandbox = false;
     
-    @NotNull(message = "Timeout không được null")
-    @Positive(message = "Timeout phải lớn hơn 0")
+    @NotNull(message = "Timeout cannot be null")
+    @Positive(message = "Timeout must be greater than 0")
     @JsonProperty("timeout")
     @Builder.Default
     private Integer timeout = 30;
     
-    @NotNull(message = "Số lần thử lại không được null")
+    @NotNull(message = "Retry attempts cannot be null")
     @JsonProperty("retry_attempts")
     @Builder.Default
     private Integer retryAttempts = 3;

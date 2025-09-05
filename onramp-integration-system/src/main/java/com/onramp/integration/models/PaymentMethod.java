@@ -9,7 +9,7 @@ import lombok.Builder;
 import java.util.List;
 
 /**
- * Mô hình dữ liệu cho phương thức thanh toán.
+ * Data model for payment methods.
  */
 @Data
 @NoArgsConstructor
@@ -17,11 +17,11 @@ import java.util.List;
 @Builder
 public class PaymentMethod {
     
-    @NotBlank(message = "ID phương thức thanh toán không được để trống")
+    @NotBlank(message = "Payment method ID cannot be empty")
     @JsonProperty("method_id")
     private String methodId;
     
-    @NotBlank(message = "Tên phương thức thanh toán không được để trống")
+    @NotBlank(message = "Payment method name cannot be empty")
     @JsonProperty("name")
     private String name;
     
