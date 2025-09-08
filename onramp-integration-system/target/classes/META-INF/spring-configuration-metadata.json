@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "onramp",
+      "type": "com.onramp.integration.config.OnRampProperties",
+      "sourceType": "com.onramp.integration.config.OnRampProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "onramp.providers",
+      "type": "java.util.Map<java.lang.String,com.onramp.integration.config.OnRampProperties$ProviderConfig>",
+      "sourceType": "com.onramp.integration.config.OnRampProperties"
+    }
+  ],
+  "hints": []
+}

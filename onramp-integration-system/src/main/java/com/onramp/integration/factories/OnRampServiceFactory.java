@@ -19,13 +19,13 @@ import java.util.Map;
 @Slf4j
 public class OnRampServiceFactory {
     private final ApplicationContext applicationContext;
-    private final OnRampProperties configProperties;
+    private final OnRampProperties onRampProperties;
     private final Map<String, Class<? extends OnRampService>> providerRegistry;
 
     @Autowired
-    public OnRampServiceFactory(ApplicationContext applicationContext, OnRampProperties configProperties) {
+    public OnRampServiceFactory(ApplicationContext applicationContext, OnRampProperties onRampProperties) {
         this.applicationContext = applicationContext;
-        this.configProperties = configProperties;
+        this.onRampProperties = onRampProperties;
         this.providerRegistry = new HashMap<>();
         syncProviders();
     }
@@ -135,7 +135,7 @@ public class OnRampServiceFactory {
      * @throws IllegalArgumentException if provider is not configured in properties
      */
     public OnRampConfig createConfigFromProperties(String providerName) {
-        OnRampProperties.ProviderConfig providerConfig = configProperties.getProviderConfig(providerName);
+        OnRampProperties.ProviderConfig providerConfig = onRampProperties.getProviderConfig(providerName);
         
         if (providerConfig == null) {
             throw new IllegalArgumentException("No configuration found for provider '" + providerName + "' in application properties");

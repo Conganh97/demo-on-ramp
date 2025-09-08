@@ -48,7 +48,35 @@ onramp:
       additional-config:
         max-connections: 100
         connection-timeout: 30000
-
+    moonpay:
+      api-key: ${MOONPAY_API_KEY:demo-api-key}
+      api-secret: ${MOONPAY_API_SECRET:}
+      base-url: ${MOONPAY_BASE_URL:https://api.moonpay.com}
+      webhook-url: ${MOONPAY_WEBHOOK_URL:}
+      sandbox: true
+      timeout: 30
+      retry-attempts: 3
+      enabled: true
+      priority: 1
+      description: "Moonpay aggregator service"
+      additional-config:
+        max-connections: 100
+        connection-timeout: 30000
+    transak:
+      api-key: ${TRANSAK_API_KEY:demo-transak-key}
+      api-secret: ${TRANSAK_API_SECRET:}
+      base-url: ${TRANSAK_BASE_URL:https://api.transak.com}
+      webhook-url: ${TRANSAK_WEBHOOK_URL:}
+      sandbox: true
+      timeout: 25
+      retry-attempts: 2
+      enabled: true
+      priority: 2
+      description: "Transak aggregator service"
+      additional-config:
+        max-connections: 50
+        connection-timeout: 20000
+        custom-setting: "transak-specific-value"
 # Logging configuration
 logging:
   level:
